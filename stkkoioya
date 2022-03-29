@@ -1,0 +1,98 @@
+--locals
+local lp = game.Players.LocalPlayer
+local ps = game:GetService("Players")
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Survive The Killer yA#6260", "Ocean")
+local Tab = Window:NewTab("Main Survive The Killer ")
+local Section = Tab:NewSection("Killers")
+
+local pt = {}
+for i,v in pairs(ps:GetPlayers()) do
+   table.insert(pt,v.Name)
+   table.sort(pt)
+end
+
+local dropdown = Section:NewDropdown("TP To Playerz","Pick Player to Tp to", pt, function(player)
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[player].Character.HumanoidRootPart.CFrame
+end)
+
+game.Players.PlayerAdded:Connect(function(player)
+    local name = player.Name
+    table.insert(pt,name)
+    dropdown:Refresh(pt)
+end)
+
+game.Players.PlayerRemoving:Connect(function(player)
+    local name = player.Name
+    for i,v in pairs(pt)do
+        if v == name then  
+            table.remove(pt,i)
+        end
+    end
+    dropdown:Refresh(pt)
+end)
+
+Section:NewButton("Esp","esp", function()
+    local ESP = loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/WRD ESP.txt"))()
+    ESP:Toggle(true)
+end)
+
+local sur = Tab:NewSection("Survivor/Survival")
+
+sur:NewButton("AutoFuel Fix","Use it in 15 seconds of the killer loading", function()
+    local args = {
+        [1] = "JoinMatch"
+    }
+    game:GetService("ReplicatedStorage").PlayerChannel:FireServer(unpack(args))    
+        game.Workspace.RocketFuel["Happy Neighborhood Fuel"].RocketFuel.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FuelDeposit.Generator.SecretCode.CFrame
+    wait(.3)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").CurrentMap.SurvivorSpawns.Spawn.CFrame
+        game.Players.LocalPlayer.Character.Humanoid.Jump = true
+end)
+
+sur:NewButton("Auto TP 2 Exit"," Use it when exit is open", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").CurrentMap.ExitDoor.Open.Door.CFrame
+end)
+
+sur:NewButton("Auto Fuel TP", "ok", function()
+    game.Workspace.RocketFuel["DEAD"].RocketFuel.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+end)
+
+game:GetService("RunService").Stepped:Connect(function()
+    if getgenv().getgenv().Noclip then
+            game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+    end
+end)
+sur:NewToggle("NoClip","ok", function(state)
+    getgenv().Noclip = state
+end)
+
+local Tab2 = Window:NewTab("POCKET SAGE")
+local Section2 = Tab2:NewSection("POCKET SAGE")
+
+Section2:NewButton("TP CELL POWER","Yes", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").CurrentMap.Puzzles.Safes.Safe2.Collider.CFrame
+end)
+
+Section2:NewButton("Destroy Traps","Destroys Trap", function()
+    game:GetService("Workspace").CurrentMap.RatTraps:Destroy()
+end)
+
+Section2:NewButton("AUTO TP 2 Exit"," Use it when exit is open", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").CurrentMap.ExitDoor.Open.Door.CFrame
+end)
+
+local Tab2 = Window:NewTab("Misc")
+local Section2 = Tab2:NewSection("Youtube And Discord")
+
+Section2:NewButton("Made By yA#6260"," Made By yA#6260", function()
+    
+end)
+
+Section2:NewButton("Copy Youtube Link"," Yt copy", function()
+    setclipboard("https://www.youtube.com/channel/UC92aBBDpwMA8DIv0UArKDKA/videos")
+    
+end)
