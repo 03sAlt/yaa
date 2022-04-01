@@ -3,7 +3,7 @@ local lp = game.Players.LocalPlayer
 local ps = game:GetService("Players")
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Survive The Killer yA#6260", "Ocean")
+local Window = Library.CreateLib("Survive The Killer 03.s#6260", "Ocean")
 local Tab = Window:NewTab("Main Survive The Killer ")
 local Section = Tab:NewSection("Killers")
 
@@ -81,14 +81,12 @@ Section2:NewButton("Destroy Traps","Destroys Trap", function()
     game:GetService("Workspace").CurrentMap.RatTraps:Destroy()
 end)
 
-Section2:NewButton("AUTO TP 2 Exit"," Use it when exit is open", function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").CurrentMap.ExitDoor.Open.Door.CFrame
-end)
+
 
 local Tab2 = Window:NewTab("Misc")
 local Section2 = Tab2:NewSection("Youtube And Discord")
 
-Section2:NewButton("Made By yA#6260"," Made By yA#6260", function()
+Section2:NewButton("Made By 03.s#6260"," Made By 03.s#6260", function()
     
 end)
 
